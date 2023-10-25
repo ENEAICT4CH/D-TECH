@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: directus
+  template:
+    metadata:
+      labels:
+        app: directus
+    spec:
+      containers:
+        - image: directus/directus:10
+          imagePullPolicy: Always
+          name: directus
+          ports:
+            - name: http
+              containerPort: 8055
+          envFrom:
+            - secretRef:
+                name: directus-secret
+          resources:
+            limits:
+              cpu: 200m
+              memory: 400Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: directus
+spec:
+  type: NodePort
+  ports:
+    - port: 8055
+      targetPort: 8055
+      protocol: TCP
+      name: directus
+  selector:
+    app: directus

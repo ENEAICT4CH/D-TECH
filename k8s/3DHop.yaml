@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threedhop
+  labels:
+    app: threedhop
+spec:
+  selector:
+    matchLabels:
+      app: threedhop
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: threedhop
+    spec:
+      containers:
+        - image: eu.gcr.io/enea-dtech/enea-dtech-nginx:1.0.0
+          name: threedhop
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 200m
+              memory: 400Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: threedhop
+  labels:
+    app: threedhop
+spec:
+  externalTrafficPolicy: Local
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 80
+  type: LoadBalancer
+  selector:
+    app: threedhop

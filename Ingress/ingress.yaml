@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    #nginx.ingress.kubernetes.io/rewrite-target: /$2
+    #nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    #nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    # nginx.org/rewrites: >-
+    #  serviceName=threedhop rewrite=/
+  labels:
+    app: ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: dtech.enea.it
+      http:
+        paths:
+          - pathType: Prefix
+            path: /model(/|$)(.*)
+            backend:
+              service:
+                name: threedhop
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: directus
+                port:
+                  number: 8055
