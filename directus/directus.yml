@@ -22,10 +22,17 @@ spec:
           envFrom:
             - secretRef:
                 name: directus-secret
+          volumeMounts:
+            - name: directus-volume
+              mountPath: /directus/uploads
           resources:
             limits:
-              cpu: 200m
-              memory: 400Mi
+              cpu: 500m
+              memory: 2000Mi
+      volumes:
+        - name: directus-volume
+          persistentVolumeClaim:
+            claimName: storage-pvc
 ---
 apiVersion: v1
 kind: Service

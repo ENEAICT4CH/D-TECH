@@ -19,10 +19,17 @@ spec:
           name: threedhop
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: threedhop-volume
+              mountPath: /usr/share/nginx/html/models
           resources:
             limits:
               cpu: 200m
               memory: 400Mi
+      volumes:
+        - name: threedhop-volume
+          persistentVolumeClaim:
+            claimName: storage-pvc
 ---
 apiVersion: v1
 kind: Service

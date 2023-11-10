@@ -24,7 +24,7 @@ stringData:
 
   STORAGE_LOCATIONS: "local"
   STORAGE_LOCAL_DRIVER: "local"
-  MAX_PAYLOAD_SIZE: "10mb"
+  MAX_PAYLOAD_SIZE: "10gb"
   STORAGE_LOCAL_ROOT: "./uploads"
 
   KEY: "dtech"
