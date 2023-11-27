@@ -15,7 +15,7 @@ spec:
         app: threedhop
     spec:
       containers:
-        - image: eu.gcr.io/enea-dtech/enea-dtech-nginx:1.0.0
+        - image: eu.gcr.io/enea-dtech/enea-dtech-nginx:latest
           name: threedhop
           ports:
             - containerPort: 80
