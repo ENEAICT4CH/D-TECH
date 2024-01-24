@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+
+  "environment": {
+    "mainpano": {
+      "url": "samples/pano/defsky-grass.jpg",
+      "rotation": 0.0
+    },
+
+    "mainlightx": {
+      "direction": [-0.1, -1, -1],
+      "shadows": false
+    }
+  },
+
+  "scenegraph": {
+    "nodes": {
+      "main": {
+        "urls": "samples/models/basic/ground.gltf",
+        "transform": {
+          "autocenter": true,
+          "bUseGeoCoords": false
+        }
+      }
+    },
+    "edges": { ".": ["main"] }
+  }
+}

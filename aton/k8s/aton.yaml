@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aton
+  labels:
+    app: aton
+spec:
+  selector:
+    matchLabels:
+      app: aton
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aton
+    spec:
+      containers:
+        - image: eu.gcr.io/enea-dtech/enea-dtech-aton:latest
+          name: aton
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: aton-volume
+              mountPath: /aton/data
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2000Mi
+      volumes:
+        - name: aton-volume
+          persistentVolumeClaim:
+            claimName: storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aton
+  labels:
+    app: aton
+spec:
+  externalTrafficPolicy: Local
+  ports:
+    - name: http
+      port: 8070
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+  selector:
+    app: aton
