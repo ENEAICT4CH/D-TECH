@@ -26,6 +26,7 @@ spec:
             limits:
               cpu: 200m
               memory: 400Mi
+          imagePullPolicy: Always
       volumes:
         - name: threedhop-volume
           persistentVolumeClaim:

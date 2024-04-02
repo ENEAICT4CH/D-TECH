@@ -5,7 +5,7 @@ set -e
 GOOGLE_PROJECT_ID="enea-dtech"
 
 IMAGE="eu.gcr.io/$GOOGLE_PROJECT_ID/enea-dtech-nginx"
-VERSION="1.1.0"
+VERSION="1.1.2"
 TAG="$IMAGE:$VERSION"
 
 gcloud config set project $GOOGLE_PROJECT_ID
